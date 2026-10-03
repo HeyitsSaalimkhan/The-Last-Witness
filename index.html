@@ -1,1 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>The Last Witness | True Crime & Unsolved Stories</title>
+  <meta
+    name="description"
+    content="The Last Witness — True crime, unsolved mysteries and stories that refuse to disappear."
+  />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #0b0b0b;
+      --card: #101010;
+      --red: #a40000;
+      --red-bright: #d00000;
+      --white: #f4f4f4;
+      --muted: #999;
+      --border: rgba(255,255,255,.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ---------------- NAVBAR ---------------- */
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 6%;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    .logo span {
+      color: var(--red-bright);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav ul a {
+      color: #bbb;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: .3s;
+    }
+
+    nav ul a:hover {
+      color: white;
+    }
+
+    .menu {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* ---------------- HERO ---------------- */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 130px 7% 80px;
+      overflow: hidden;
+
+      background:
+        radial-gradient(circle at 80% 50%, rgba(150,0,0,.18), transparent 35%),
+        radial-gradient(circle at 20% 70%, rgba(100,0,0,.10), transparent 30%),
+        #050505;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,.015) 0px,
+          rgba(255,255,255,.015) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      opacity: .35;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      color: #b5b5b5;
+      font-size: 12px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(55px, 9vw, 125px);
+      line-height: .85;
+      letter-spacing: -5px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 span {
+      color: var(--red-bright);
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: #aaa;
+      font-size: 18px;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 25px;
+      border: 1px solid #444;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      transition: .3s;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--red-bright);
+    }
+
+    .scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 7%;
+      color: #555;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ---------------- GENERAL ---------------- */
+
+    section {
+      padding: 110px 7%;
+    }
+
+    .section-label {
+      color: var(--red-bright);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-family: Georgia, serif;
+      font-size: clamp(35px, 5vw, 65px);
+      line-height: 1;
+      margin-bottom: 55px;
+      text-transform: uppercase;
+    }
+
+    /* ---------------- CASES ---------------- */
+
+    .cases {
+      background: #080808;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .case {
+      min-height: 330px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.1)),
+        radial-gradient(circle at 50% 30%, #3c0808, #090909 65%);
+      transition: .4s;
+    }
+
+    .case:hover {
+      transform: translateY(-7px);
+      border-color: rgba(200,0,0,.5);
+    }
+
+    .case-number {
+      position: absolute;
+      top: 20px;
+      right: 22px;
+      color: #444;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .status {
+      display: inline-block;
+      width: fit-content;
+      padding: 5px 9px;
+      background: rgba(160,0,0,.2);
+      border: 1px solid rgba(200,0,0,.3);
+      color: #e00000;
+      font-size: 9px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .case h3 {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .case p {
+      color: #888;
+      font-size: 13px;
+    }
+
+    /* ---------------- EPISODES ---------------- */
+
+    .episode-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .episode {
+      border: 1px solid var(--border);
+      background: var(--card);
+      overflow: hidden;
+    }
+
+    .episode-image {
+      height: 240px;
+      background:
+        linear-gradient(135deg, rgba(150,0,0,.35), transparent),
+        linear-gradient(45deg, #151515, #050505);
+      position: relative;
+    }
+
+    .episode-image::after {
+      content: "THE LAST WITNESS";
+      position: absolute;
+      bottom: 18px;
+      left: 20px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: #777;
+    }
+
+    .episode-info {
+      padding: 25px;
+    }
+
+    .episode-info small {
+      color: var(--red-bright);
+      letter-spacing: 2px;
+    }
+
+    .episode-info h3 {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      margin: 8px 0;
+    }
+
+    .episode-info p {
+      color: #888;
+      font-size: 14px;
+    }
+
+    /* ---------------- ABOUT ---------------- */
+
+    .about {
+      background: #080808;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: #999;
+      font-size: 17px;
+      margin-bottom: 20px;
+    }
+
+    .quote {
+      border-left: 2px solid var(--red);
+      padding-left: 25px;
+      font-family: Georgia, serif;
+      font-size: 30px;
+      line-height: 1.3;
+    }
+
+    .quote span {
+      color: var(--red-bright);
+    }
+
+    /* ---------------- SPONSORSHIP ---------------- */
+
+    .sponsor {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(130,0,0,.18), transparent 45%),
+        #050505;
+    }
+
+    .sponsor-intro {
+      max-width: 700px;
+      color: #999;
+      margin-bottom: 50px;
+      font-size: 16px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .price-card {
+      border: 1px solid var(--border);
+      background: #0b0b0b;
+      padding: 30px 25px;
+      transition: .3s;
+    }
+
+    .price-card:hover {
+      border-color: rgba(200,0,0,.6);
+      transform: translateY(-5px);
+    }
+
+    .price-card.featured {
+      border-color: var(--red);
+      position: relative;
+    }
+
+    .featured::before {
+      content: "POPULAR";
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 5px 10px;
+      background: var(--red);
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    .price-card h3 {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .price span {
+      color: #777;
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    .price-card ul {
+      list-style: none;
+      color: #888;
+      font-size: 13px;
+    }
+
+    .price-card li {
+      padding: 8px 0;
+      border-bottom: 1px solid #181818;
+    }
+
+    .collab-box {
+      margin-top: 50px;
+      padding: 40px;
+      border: 1px solid #222;
+      background: #0a0a0a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .collab-box h3 {
+      font-family: Georgia, serif;
+      font-size: 32px;
+    }
+
+    .collab-box p {
+      color: #777;
+      margin-top: 8px;
+    }
+
+    /* ---------------- CONTACT ---------------- */
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact p {
+      color: #888;
+      max-width: 550px;
+      margin: 0 auto 30px;
+    }
+
+    .contact-email {
+      font-family: Georgia, serif;
+      font-size: clamp(25px, 5vw, 50px);
+      color: white;
+      transition: .3s;
+    }
+
+    .contact-email:hover {
+      color: var(--red-bright);
+    }
+
+    /* ---------------- FOOTER ---------------- */
+
+    footer {
+      padding: 35px 7%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #555;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 900px) {
+
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #050505;
+        flex-direction: column;
+        padding: 25px;
+        border-bottom: 1px solid #222;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .menu {
+        display: block;
+      }
+
+      .case-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      section {
+        padding: 80px 6%;
+      }
+
+      .hero {
+        padding-left: 6%;
+        padding-right: 6%;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .case-grid,
+      .episode-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .episode-image {
+        height: 200px;
+      }
+
+      .collab-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <a href="#home" class="logo">
+      THE <span>LAST</span> WITNESS
+    </a>
+
+    <div class="menu" onclick="toggleMenu()">☰</div>
+
+    <ul id="navLinks">
+      <li><a href="#cases">Case Files</a></li>
+      <li><a href="#episodes">Episodes</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#sponsor">Collaborate</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        True Crime • Unsolved Stories • Dark History
+      </div>
+
+      <h1>
+        THE<br>
+        <span>LAST</span><br>
+        WITNESS
+      </h1>
+
+      <p>
+        Some stories were never meant to be forgotten.
+        We investigate the crimes, mysteries and unanswered
+        questions that still haunt the world.
+      </p>
+
+      <div class="buttons">
+        <a href="#episodes" class="btn btn-primary">
+          Watch Episodes
+        </a>
+
+        <a href="#sponsor" class="btn">
+          Work With Us
+        </a>
+      </div>
+
+    </div>
+
+    <div class="scroll">
+      Scroll to investigate ↓
+    </div>
+
+  </section>
+
+
+  <!-- CASE FILES -->
+
+  <section class="cases" id="cases">
+
+    <div class="section-label">
+      The Archive
+    </div>
+
+    <h2 class="section-title">
+      Case Files
+    </h2>
+
+    <div class="case-grid">
+
+      <div class="case">
+        <div class="case-number">CASE 001</div>
+
+        <div>
+          <div class="status">UNSOLVED</div>
+          <h3>The Zodiac Killer</h3>
+          <p>
+            A coded message. Five confirmed murders.
+            And an identity that remains unknown.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="case">
+        <div class="case-number">CASE 002</div>
+
+        <div>
+          <div class="status">CLOSED</div>
+          <h3>The Night Stalker</h3>
+          <p>
+            Richard Ramirez and the terrifying crime spree
+            that shocked California.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="case">
+        <div class="case-number">CASE 003</div>
+
+        <div>
+          <div class="status">COLD CASE</div>
+          <h3>Coming Soon</h3>
+          <p>
+            Another case is waiting to be uncovered.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EPISODES -->
+
+  <section id="episodes">
+
+    <div class="section-label">
+      Watch The Investigation
+    </div>
+
+    <h2 class="section-title">
+      Latest Episodes
+    </h2>
+
+    <div class="episode-grid">
+
+      <article class="episode">
+
+        <div class="episode-image"></div>
+
+        <div class="episode-info">
+
+          <small>EPISODE 01</small>
+
+          <h3>The Zodiac Killer</h3>
+
+          <p>
+            The killer who taunted police, sent coded letters
+            and disappeared into history.
+          </p>
+
+          <br>
+
+          <a
+            class="btn"
+            href="https://www.youtube.com/"
+            target="_blank"
+          >
+            Watch on YouTube
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <article class="episode">
+
+        <div class="episode-image"></div>
+
+        <div class="episode-info">
+
+          <small>EPISODE 02</small>
+
+          <h3>The Night Stalker</h3>
+
+          <p>
+            Two months of terror. Multiple victims.
+            One of America's most infamous serial killers.
+          </p>
+
+          <br>
+
+          <a
+            class="btn"
+            href="https://www.youtube.com/"
+            target="_blank"
+          >
+            Coming Soon
+          </a>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section class="about" id="about">
+
+    <div class="about-text">
+
+      <div class="section-label">
+        About TLW
+      </div>
+
+      <h2 class="section-title">
+        Every Story<br>Leaves A Witness.
+      </h2>
+
+      <p>
+        The Last Witness is a documentary storytelling platform
+        focused on true crime, serial killers, mysteries and
+        stories that refuse to disappear.
+      </p>
+
+      <p>
+        Our goal is simple: investigate the story,
+        respect the victims and leave the viewer with
+        one question —
+      </p>
+
+    </div>
+
+    <div class="quote">
+      “If you knew the truth,
+      <span>would you still look away?</span>”
+    </div>
+
+  </section>
+
+
+  <!-- SPONSORSHIP -->
+
+  <section class="sponsor" id="sponsor">
+
+    <div class="section-label">
+      Work With The Last Witness
+    </div>
+
+    <h2 class="section-title">
+      Put Your Brand<br>
+      In The Story.
+    </h2>
+
+    <p class="sponsor-intro">
+      Reach an audience interested in stories, mysteries,
+      documentaries and dark history. We offer cinematic,
+      natural brand integrations designed to fit the content
+      rather than interrupt it.
+    </p>
+
+
+    <div class="pricing-grid">
+
+      <!-- 30 SEC -->
+
+      <div class="price-card">
+
+        <h3>30 Sec</h3>
+
+        <div class="price">
+          ₹15,000<span>+</span>
+        </div>
+
+        <ul>
+          <li>30-second integration</li>
+          <li>Natural brand mention</li>
+          <li>YouTube description link</li>
+          <li>Campaign disclosure</li>
+        </ul>
+
+      </div>
+
+
+      <!-- 60 SEC -->
+
+      <div class="price-card featured">
+
+        <h3>60 Sec</h3>
+
+        <div class="price">
+          ₹25,000<span>+</span>
+        </div>
+
+        <ul>
+          <li>45–60 second integration</li>
+          <li>Cinematic storytelling</li>
+          <li>YouTube description link</li>
+          <li>Strong audience placement</li>
+        </ul>
+
+      </div>
+
+
+      <!-- DEDICATED -->
+
+      <div class="price-card">
+
+        <h3>Dedicated</h3>
+
+        <div class="price">
+          ₹60,000<span>+</span>
+        </div>
+
+        <ul>
+          <li>Dedicated sponsored video</li>
+          <li>Custom storytelling</li>
+          <li>Brand integration</li>
+          <li>Social promotion</li>
+        </ul>
+
+      </div>
+
+
+      <!-- CUSTOM -->
+
+      <div class="price-card">
+
+        <h3>Custom</h3>
+
+        <div class="price">
+          Let's Talk
+        </div>
+
+        <ul>
+          <li>Multi-video campaigns</li>
+          <li>Series sponsorship</li>
+          <li>Long-term partnerships</li>
+          <li>Custom deliverables</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="collab-box">
+
+      <div>
+        <h3>Have a story worth witnessing?</h3>
+
+        <p>
+          Let's create something unforgettable.
+        </p>
+      </div>
+
+      <a href="#contact" class="btn btn-primary">
+        Request Collaboration
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="contact">
+
+    <div class="section-label">
+      Contact
+    </div>
+
+    <h2 class="section-title">
+      Let's Talk.
+    </h2>
+
+    <p>
+      For sponsorships, paid promotions, brand collaborations,
+      media enquiries or business partnerships.
+    </p>
+
+    <!-- CHANGE THIS EMAIL -->
+
+    <a
+      href="mailto:your@email.com"
+      class="contact-email"
+    >
+      your@email.com
+    </a>
+
+    <br><br>
+
+    <a
+      href="mailto:your@email.com"
+      class="btn btn-primary"
+    >
+      Send An Enquiry
+    </a>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div>
+      © 2026 The Last Witness
+    </div>
+
+    <div>
+      Every story leaves a witness.
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    function toggleMenu() {
+      document
+        .getElementById("navLinks")
+        .classList
+        .toggle("active");
+    }
+
+    // Close mobile menu after clicking a link
+
+    document.querySelectorAll("#navLinks a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        document
+          .getElementById("navLinks")
+          .classList
+          .remove("active");
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
